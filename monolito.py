@@ -122,3 +122,190 @@ class SistemaRPG:
         print(f"Mundos disponíveis para o jogador {jogador_login}:")
         for mundo in self.mundos:
             print(f"- {mundo['nome']} ({mundo['descricao']})")
+
+    def exibir_menu(self):
+        while True:
+            print("\n=== Sistema RPG - Menu Principal ===")
+            print("1. Gerenciamento de Usuários")
+            print("2. Gerenciamento de Mundos")
+            print("3. Gerenciamento de Páginas")
+            print("4. Gerenciamento de Personagens")
+            print("5. Gerenciamento de Associações")
+            print("0. Sair")
+            
+            opcao = input("\nEscolha uma opção: ")
+            
+            match opcao:
+                case "1":
+                    self.menu_usuarios()
+                case "2":
+                    self.menu_mundos()
+                case "3":
+                    self.menu_paginas()
+                case "4":
+                    self.menu_personagens()
+                case "5":
+                    self.menu_associacoes()
+                case "0":
+                    print("Saindo do sistema...")
+                    break
+                case _:
+                    print("Opção inválida!")
+
+    def menu_usuarios(self):
+        while True:
+            print("\n=== Gerenciamento de Usuários ===")
+            print("1. Criar usuário")
+            print("2. Editar usuário")
+            print("3. Excluir usuário")
+            print("4. Login")
+            print("0. Voltar")
+            
+            opcao = input("\nEscolha uma opção: ")
+            
+            match opcao:
+                case "1":
+                    tipo = input("Tipo (mestre/jogador): ")
+                    login = input("Login: ")
+                    senha = input("Senha: ")
+                    self.criar_usuario(tipo, login, senha)
+                case "2":
+                    login = input("Login: ")
+                    nova_senha = input("Nova senha: ")
+                    self.editar_usuario(login, nova_senha)
+                case "3":
+                    login = input("Login: ")
+                    self.excluir_usuario(login)
+                case "4":
+                    login = input("Login: ")
+                    senha = input("Senha: ")
+                    self.login(login, senha)
+                case "0":
+                    break
+                case _:
+                    print("Opção inválida!")
+
+    def menu_mundos(self):
+        while True:
+            print("\n=== Gerenciamento de Mundos ===")
+            print("1. Criar mundo")
+            print("2. Editar mundo")
+            print("3. Excluir mundo")
+            print("4. Listar mundos")
+            print("0. Voltar")
+            
+            opcao = input("\nEscolha uma opção: ")
+            
+            match opcao:
+                case "1":
+                    nome = input("Nome do mundo: ")
+                    descricao = input("Descrição: ")
+                    mestre_login = input("Login do mestre: ")
+                    self.criar_mundo(nome, descricao, mestre_login)
+                case "2":
+                    nome = input("Nome do mundo: ")
+                    nova_descricao = input("Nova descrição: ")
+                    self.editar_mundo(nome, nova_descricao)
+                case "3":
+                    nome = input("Nome do mundo: ")
+                    self.excluir_mundo(nome)
+                case "4":
+                    jogador_login = input("Login do jogador: ")
+                    self.listar_mundos(jogador_login)
+                case "0":
+                    break
+                case _:
+                    print("Opção inválida!")
+
+    def menu_paginas(self):
+        while True:
+            print("\n=== Gerenciamento de Páginas ===")
+            print("1. Criar página")
+            print("2. Editar página")
+            print("3. Excluir página")
+            print("0. Voltar")
+            
+            opcao = input("\nEscolha uma opção: ")
+            
+            match opcao:
+                case "1":
+                    titulo = input("Título: ")
+                    texto = input("Texto: ")
+                    mestre_login = input("Login do mestre: ")
+                    self.criar_pagina(titulo, texto, mestre_login)
+                case "2":
+                    titulo = input("Título: ")
+                    novo_texto = input("Novo texto: ")
+                    self.editar_pagina(titulo, novo_texto)
+                case "3":
+                    titulo = input("Título: ")
+                    self.excluir_pagina(titulo)
+                case "0":
+                    break
+                case _:
+                    print("Opção inválida!")
+
+    def menu_personagens(self):
+        while True:
+            print("\n=== Gerenciamento de Personagens ===")
+            print("1. Criar personagem")
+            print("2. Editar personagem")
+            print("3. Excluir personagem")
+            print("0. Voltar")
+            
+            opcao = input("\nEscolha uma opção: ")
+            
+            match opcao:
+                case "1":
+                    nome = input("Nome: ")
+                    idade = int(input("Idade: "))
+                    peso = float(input("Peso: "))
+                    profissao = input("Profissão: ")
+                    cultura = input("Cultura: ")
+                    antecedente = input("Antecedente: ")
+                    mundo_nome = input("Nome do mundo: ")
+                    jogador_login = input("Login do jogador: ")
+                    self.criar_personagem(nome, idade, peso, profissao, cultura, 
+                                       antecedente, mundo_nome, jogador_login)
+                case "2":
+                    nome = input("Nome: ")
+                    nova_idade = int(input("Nova idade: "))
+                    self.editar_personagem(nome, nova_idade)
+                case "3":
+                    nome = input("Nome: ")
+                    self.excluir_personagem(nome)
+                case "0":
+                    break
+                case _:
+                    print("Opção inválida!")
+
+    def menu_associacoes(self):
+        while True:
+            print("\n=== Gerenciamento de Associações ===")
+            print("1. Associar página a profissão/cultura")
+            print("2. Associar conhecimento a personagem")
+            print("0. Voltar")
+            
+            opcao = input("\nEscolha uma opção: ")
+            
+            match opcao:
+                case "1":
+                    titulo = input("Título da página: ")
+                    profissao = input("Profissão: ")
+                    cultura = input("Cultura: ")
+                    self.associar_pagina_profissao_cultura(titulo, profissao, cultura)
+                case "2":
+                    titulo = input("Título da página: ")
+                    personagem = input("Nome do personagem: ")
+                    self.associar_conhecimento_personagem(titulo, personagem)
+                case "0":
+                    break
+                case _:
+                    print("Opção inválida!")
+
+# Example usage:
+if __name__ == "__main__":
+    sistema = SistemaRPG()
+    sistema.exibir_menu()
+
+
